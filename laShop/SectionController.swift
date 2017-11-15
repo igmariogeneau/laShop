@@ -1,7 +1,7 @@
 //=======================================
 import UIKit
 //=======================================
-class SectionController: UIViewController {
+class SectionController: UIViewController, UITextFieldDelegate {
     //---------------------------//--------------------------- MARK: -------> IBOutlets
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var passwordField: UITextField!
@@ -65,8 +65,22 @@ class SectionController: UIViewController {
         if passwordField.text == userDefObj.getValue(theKey: "password") as? String {
             performSegue(withIdentifier: "admin", sender: nil)
         } else {
+            passwordField.isSecureTextEntry = false
             passwordField.text = "Mauvais mot de passe..."
         }
+    }
+    //---------------------------//---------------------------
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if userDefObj.doesKeyExist(theKey: "password") {
+            passwordField.isSecureTextEntry = true
+        }
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if userDefObj.doesKeyExist(theKey: "password") {
+            passwordField.isSecureTextEntry = true
+        }
+        return true
     }
     //---------------------------//---------------------------
 }

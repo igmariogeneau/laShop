@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class Parser: UITableViewCell {
+class Parser1: UITableViewCell {
     
 }
 
